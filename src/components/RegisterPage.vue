@@ -20,7 +20,7 @@ export default {
                 "email": this.email,
                 "password": this.kennwort
             }
-            await fetch("http://localhost:8081/api/v1/benutzer/", {
+            await fetch("http://localhost:8081/api/v1/benutzer", {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
@@ -77,7 +77,7 @@ export default {
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
                 <label for="meldung">Meldung</label>
-                <input v-model="this.meldung" type="text" name="meldung">
+                <input v-model="this.meldung" type="text" name="meldung" readonly>
             </div>
         </div>
     </form>

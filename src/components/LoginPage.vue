@@ -50,15 +50,15 @@ export default {
 <template>
     <form class="row">
         <div class="row col-12 align-self-center">
-            <div class="col-2 align-self-center offset-5">
-                <label for="email">E-Mail</label>
-                <input @input="onInput" v-model="this.email" type="email" name="email" required>
+            <div class="row col-2 align-self-center offset-5">
+                <label class="col-12" for="email">E-Mail</label>
+                <input class="col-12" @input="onInput" v-model="this.email" type="email" name="email" required>
             </div>
         </div>
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
-                <label for="kennwort">Kennwort</label>
-                <input @input="onInput" v-model="this.kennwort" type="password" name="kennwort" required>
+                <label class="col-12" for="kennwort">Kennwort</label>
+                <input class="col-12" @input="onInput" v-model="this.kennwort" type="password" name="kennwort" required>
             </div>
         </div>
         <div class="row col-12 align-self-center">
@@ -67,9 +67,9 @@ export default {
             </div>
         </div>
         <div class="row col-12 align-self-center">
-            <div class="col-2 align-self-center offset-5">
-                <label for="meldung">Meldung</label>
-                <input v-model="this.meldung"  type="text" name="meldung" >
+            <div class="row col-2 align-self-center offset-5">
+                <label class="col-12" for="meldung">Meldung</label>
+                <input class="col-12" v-model="this.meldung"  type="text" name="meldung" >
             </div>
         </div>
     </form><div class="row col-12 align-self-center">

@@ -2,6 +2,7 @@
 export default {
     data() {
         return {
+            benutzername: "",
             email: "",
             kennwort: "",
             meldung: ""
@@ -10,15 +11,16 @@ export default {
     created() {
     },
     methods: {
-        async login(e) {
+        async register(e) {
             e.preventDefault();
             console.log("E-Mail: " + this.email);
             console.log("Kennwort: " + this.kennwort);
             let body = {
+                "benutzername": this.benutzername,
                 "email": this.email,
                 "password": this.kennwort
             }
-            await fetch("http://localhost:8081/api/v1/benutzer/check-login", {
+            await fetch("http://localhost:8081/api/v1/benutzer/", {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
@@ -33,14 +35,14 @@ export default {
             })
         },
         onInput() {
+            console.log("Benutzername: " + this.benutzername);
             console.log("E-Mail: " + this.email);
             console.log("Kennwort: " + this.kennwort);
         },
         setMeldung(isSuccess) {
-            if (isSuccess === true){
+            if (isSuccess === true) {
                 this.meldung = "Erfolgreich!"
-            }
-            else {
+            } else {
                 this.meldung = "Fehlgeschlagen!"
             }
         }
@@ -49,6 +51,12 @@ export default {
 </script>
 <template>
     <form class="row">
+        <div class="row col-12 align-self-center">
+            <div class="col-2 align-self-center offset-5">
+                <label for="benutzername">Benutzername</label>
+                <input @input="onInput" v-model="this.benutzername" type="text" name="benutzername" required>
+            </div>
+        </div>
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
                 <label for="email">E-Mail</label>
@@ -63,15 +71,16 @@ export default {
         </div>
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
-                <button @click="login($event)" class="btn btn-primary">Login</button>
+                <button @click="register($event)" class="btn btn-primary">Register</button>
             </div>
         </div>
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
                 <label for="meldung">Meldung</label>
-                <input v-model="this.meldung"  type="text" name="meldung" >
+                <input v-model="this.meldung" type="text" name="meldung">
             </div>
         </div>
-    </form><div class="row col-12 align-self-center">
-</div>
+    </form>
+    <div class="row col-12 align-self-center">
+    </div>
 </template>

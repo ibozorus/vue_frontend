@@ -44,13 +44,13 @@ export default {
             console.log("Kennwort: " + this.kennwort);
         },
         setMeldung(isSuccess) {
-            if (isSuccess === true) {
-                this.meldung = "Erfolgreich!";
-                alert("Erfolgreich!");
-            } else {
-                this.meldung = "Fehlgeschlagen!";
-                alert("Fehlgeschlagen!");
-            }
+            // if (isSuccess === true) {
+            //     this.meldung = "Erfolgreich!";
+            //     alert("Erfolgreich!");
+            // } else {
+            //     this.meldung = "Fehlgeschlagen!";
+            //     alert("Fehlgeschlagen!");
+            // }
         }
     }
 }

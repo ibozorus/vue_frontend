@@ -1,13 +1,11 @@
 <script>
-
+import Board from "@/components/Board.vue";
 
 export default {
 
-    components: {
-    },
+    components: {Board},
     data() {
-        return {
-        }
+        return {}
     },
     created() {
     },
@@ -15,9 +13,12 @@ export default {
 }
 </script>
 <template>
-  <div>
-      ZORT
-  </div>
+    <div class="row">
+
+        <Board>
+
+        </Board>
+    </div>
 </template>
 <style>
 </style>

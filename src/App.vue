@@ -1,51 +1,43 @@
 <script>
-import {preventOverflow} from "@popperjs/core";
+
+import Login from './components/LoginPage.vue'
+import Register from './components/RegisterPage.vue'
 
 export default {
+
+    components: {
+        "login": Login,
+        "register": Register
+    },
     data() {
         return {
-            allBenutzer: [],
-            benutzername: "",
-            password: ""
+            activeComp: 'login'
         }
     },
     created() {
-        this.fetchAllUsers();
     },
-    methods: {
-        async fetchAllUsers() {
-            await fetch("http://localhost:8081/api/v1/benutzer").then((response) => {
-                response.json().then((data) => {
-                    this.allBenutzer = data;
-                    console.log(data);
-                });
-            });
-        },
-        login(e) {
-            e.preventDefault();
-            for(let x in this.allBenutzer){
-                if(x.ben)
-            }
-        }
-    }
+    methods: {}
 }
 </script>
 <template>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-    <div v-for="benutzer in allBenutzer" :id="benutzer.id">
-        <p>Benutzername</p><span>{{ benutzer.benutzername }}</span>
-        <p>E-Mail</p><span>{{ benutzer.email }}</span>
-    </div>
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" @click="activeComp = 'login'">Login <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" @click="activeComp = 'register'">Register <span class="sr-only"></span></a>
+            </li>
+        </ul>
+    </nav>
     <div>
-        <form>
-            <label for="benutzername"><b>Benutzername</b></label>
-            <input v-model="this.benutzername" type="text" placeholder="Enter Username" name="benutzername" required>
-
-            <label for="kennwort"><b>Benutzername</b></label>
-            <input v-model="this.password" type="password" placeholder="Enter Password" name="kennwort" required>
-
-            <button @click="login($event)" id="login">Einloggen</button>
-        </form>
+        <component :is="activeComp"></component>
     </div>
-
 </template>
+<style>
+a:hover {
+    cursor: pointer;
+}
+</style>

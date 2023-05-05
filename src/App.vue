@@ -2,12 +2,14 @@
 
 import Login from './components/LoginPage.vue'
 import Register from './components/RegisterPage.vue'
+import BoardsUebersicht from "@/components/BoardsUebersicht.vue";
 
 export default {
 
     components: {
         "login": Login,
-        "register": Register
+        "register": Register,
+        "boards": BoardsUebersicht
     },
     data() {
         return {
@@ -16,7 +18,11 @@ export default {
     },
     created() {
     },
-    methods: {}
+    methods: {
+        onClickChild (value) {
+            this.activeComp = value;
+        }
+    }
 }
 </script>
 <template>
@@ -30,10 +36,13 @@ export default {
             <li class="nav-item active">
                 <a class="nav-link" @click="activeComp = 'register'">Register <span class="sr-only"></span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link disabled" @click="activeComp = 'boards'">Boards <span class="sr-only"></span></a>
+            </li>
         </ul>
     </nav>
     <div>
-        <component :is="activeComp"></component>
+        <component @clicked="onClickChild" :is="activeComp"></component>
     </div>
 </template>
 <style>

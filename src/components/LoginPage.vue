@@ -10,6 +10,10 @@ export default {
     created() {
     },
     methods: {
+        changeToBoard() {
+            this.$emit('clicked', 'boards')
+        }
+        ,
         async login(e) {
             e.preventDefault();
             console.log("E-Mail: " + this.email);
@@ -29,6 +33,9 @@ export default {
                 res.json().then((data) => {
                     console.log(data);
                     this.setMeldung(data);
+                    if(data === true) {
+                        this.changeToBoard();
+                    }
                 })
             })
         },
@@ -37,11 +44,12 @@ export default {
             console.log("Kennwort: " + this.kennwort);
         },
         setMeldung(isSuccess) {
-            if (isSuccess === true){
-                this.meldung = "Erfolgreich!"
-            }
-            else {
-                this.meldung = "Fehlgeschlagen!"
+            if (isSuccess === true) {
+                this.meldung = "Erfolgreich!";
+                alert("Erfolgreich!");
+            } else {
+                this.meldung = "Fehlgeschlagen!";
+                alert("Fehlgeschlagen!");
             }
         }
     }
@@ -66,12 +74,13 @@ export default {
                 <button @click="login($event)" class="btn btn-primary">Login</button>
             </div>
         </div>
-        <div class="row col-12 align-self-center">
-            <div class="row col-2 align-self-center offset-5">
-                <label class="col-12" for="meldung">Meldung</label>
-                <input class="col-12" v-model="this.meldung"  type="text" name="meldung" >
-            </div>
-        </div>
-    </form><div class="row col-12 align-self-center">
-</div>
+        <!--        <div class="row col-12 align-self-center">-->
+        <!--            <div class="row col-2 align-self-center offset-5">-->
+        <!--                <label class="col-12" for="meldung">Meldung</label>-->
+        <!--                <input class="col-12" v-model="this.meldung"  type="text" name="meldung" >-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </form>
+    <div class="row col-12 align-self-center">
+    </div>
 </template>

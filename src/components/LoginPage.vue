@@ -14,6 +14,10 @@ export default {
             this.$emit('clicked', 'boards')
         }
         ,
+        changeToRegisterPage() {
+            this.$emit('clicked', 'register')
+        }
+        ,
         async login(e) {
             e.preventDefault();
             console.log("E-Mail: " + this.email);
@@ -35,6 +39,7 @@ export default {
                     this.setMeldung(data);
                     if (data.message === "success") {
                         localStorage.setItem("benutzerId", data.benutzerId);
+                        this.$emit("set-benutzername", this.email);
                         this.changeToBoard();
                     } else {
                         alert("login failed");
@@ -76,6 +81,11 @@ export default {
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
                 <button @click="login($event)" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+        <div class="row col-12 align-self-center">
+            <div class="col-2 align-self-center offset-5">
+                <button @click="changeToRegisterPage()" class="btn btn-primary">Noch kein Konto?</button>
             </div>
         </div>
         <!--        <div class="row col-12 align-self-center">-->

@@ -46,12 +46,11 @@ export default {
         <tr>
             <th>{{ boardText }}</th>
         </tr>
-        <div v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" class="col-4">
 
-            <Eintrag :eintrag-id="eintrag.id" :eintrag-text="eintrag.text">
+        <Eintrag v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
+                 :eintrag-text="eintrag.text">
 
-            </Eintrag>
-        </div>
+        </Eintrag>
 
     </table>
 </template>

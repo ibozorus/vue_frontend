@@ -36,12 +36,10 @@ export default {
 }
 </script>
 <template>
-    <div class="row">
-        <div v-if="anzahlBoards > 0" v-for="board in boards" class="col-4">
-            <Board :board-id="board.id" :board-text="board.text">
+    <div >
+        <Board v-if="anzahlBoards > 0" v-for="board in boards" :board-id="board.id" :board-text="board.text">
 
-            </Board>
-        </div>
+        </Board>
     </div>
 </template>
 <style>

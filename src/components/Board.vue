@@ -64,7 +64,7 @@ export default {
                 <th>{{ board.text }}</th>
             </tr>
             <div v-for="eintrag in eintraege">
-                <tr v-if="eintrag.boardId === board.id" :id="'eintrag-'+eintrag.id" >
+                <tr v-if="eintrag.board.id === board.id" :id="'eintrag-'+eintrag.id" >
                     <td>{{ eintrag.text }}</td>
                 </tr>
             </div>

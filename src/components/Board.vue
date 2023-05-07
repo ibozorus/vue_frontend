@@ -1,78 +1,58 @@
 <script>
-import {isProxy, toRaw} from 'vue';
+import Eintrag from "@/components/Eintrag.vue";
 
 export default {
     props: {
         "boardId": Number,
         "boardText": String
     },
-    components: {},
+    components: {Eintrag},
     data() {
         return {
+            "eintraege": [],
+            "anzahlEintraege": 0
 
         }
     },
     created() {
-        // this.getBoards().then(() => {
-        //     this.getEintraege();
-        // });
-        // console.log(board);
+        this.getEintraege();
     },
     mounted() {
-        console.log(this.boardId)
-        console.log(this.boardText)
     },
     methods: {
-        // async getEintraege() {
-        //     return await fetch("http://localhost:8081/api/v1/eintrag/1", {
-        //         method: 'GET',
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json'
-        //         },
-        //     }).then((res) => {
-        //         res.json().then((data) => {
-        //             console.log(data);
-        //             this.anzahlEintraege = data.length;
-        //             this.eintraege = data;
-        //             console.log(this.eintraege[0].board_id)
-        //
-        //
-        //         })
-        //     })
-        // }
-        // ,
-        // async getBoards() {
-        //     return await fetch("http://localhost:8081/api/v1/board/1", {
-        //         method: 'GET',
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json'
-        //         },
-        //     }).then((res) => {
-        //         res.json().then((data) => {
-        //             console.log(data);
-        //             this.anzahlBoards = data.length;
-        //             this.boards = data;
-        //
-        //         })
-        //     })
-        // }
+        async getEintraege() {
+            return await fetch("http://localhost:8081/api/v1/eintrag/" + this.boardId, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then((res) => {
+                res.json().then((data) => {
+                    console.log(data);
+                    this.anzahlEintraege = data.length;
+                    this.eintraege = data;
+                    console.log(this.eintraege[0].board.id)
+
+
+                })
+            })
+        }
     }
 }
 </script>
 <template>
-
-
     <table :id="'board-'+this.boardId">
         <tr>
             <th>{{ boardText }}</th>
         </tr>
-        <!--            <div v-for="eintrag in eintraege">-->
-        <!--                <tr v-if="eintrag.board.id === board.id" :id="'eintrag-'+eintrag.id" >-->
-        <!--                    <td>{{ eintrag.text }}</td>-->
-        <!--                </tr>-->
-        <!--            </div>-->
+        <div v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" class="col-4">
+
+            <Eintrag :eintrag-id="eintrag.id" :eintrag-text="eintrag.text">
+
+            </Eintrag>
+        </div>
+
     </table>
 </template>
 <style>

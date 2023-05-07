@@ -17,7 +17,8 @@ export default {
     },
     methods: {
         async getBoards() {
-            return await fetch("http://localhost:8081/api/v1/board/1", {
+            let benutzerId = localStorage.getItem("benutzerId");
+            return await fetch("http://localhost:8081/api/v1/board/" + benutzerId, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -36,7 +37,7 @@ export default {
 }
 </script>
 <template>
-    <div >
+    <div>
         <Board v-if="anzahlBoards > 0" v-for="board in boards" :board-id="board.id" :board-text="board.text">
 
         </Board>

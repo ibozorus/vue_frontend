@@ -33,9 +33,13 @@ export default {
                 res.json().then((data) => {
                     console.log(data);
                     this.setMeldung(data);
-                    if(data === true) {
+                    if (data.message === "success") {
+                        localStorage.setItem("benutzerId", data.benutzerId);
                         this.changeToBoard();
+                    } else {
+                        alert("login failed");
                     }
+
                 })
             })
         },

@@ -32,7 +32,7 @@ export default {
                     console.log(data);
                     this.anzahlEintraege = data.length;
                     this.eintraege = data;
-                    console.log(this.eintraege[0].board.id)
+                    console.log("Boardid: " + this.eintraege[0].board.id)
 
 
                 })

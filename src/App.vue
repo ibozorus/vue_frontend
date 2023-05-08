@@ -18,6 +18,7 @@ export default {
         }
     },
     created() {
+        sessionStorage.clear();
     },
     methods: {
         onClickChild(value) {
@@ -35,7 +36,7 @@ export default {
             }
         },
         abmelden() {
-            localStorage.removeItem("benutzerId");
+            sessionStorage.removeItem("benutzerId");
             this.onClickChild("login");
             this.benutzername = null;
 

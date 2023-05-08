@@ -38,7 +38,7 @@ export default {
                     console.log(data);
                     this.setMeldung(data);
                     if (data.message === "success") {
-                        localStorage.setItem("benutzerId", data.benutzerId);
+                        sessionStorage.setItem("benutzerId", data.benutzerId);
                         this.$emit("set-benutzername", this.email);
                         this.changeToBoard();
                     } else {

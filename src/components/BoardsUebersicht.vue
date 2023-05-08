@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         async getBoards() {
-            let benutzerId = localStorage.getItem("benutzerId");
+            let benutzerId = sessionStorage.getItem("benutzerId");
             return await fetch("http://localhost:8081/api/v1/board/" + benutzerId, {
                 method: 'GET',
                 headers: {

@@ -45,6 +45,10 @@ export default {
             } else {
                 this.meldung = "Fehlgeschlagen!"
             }
+        },
+        changeToLoginPage(){
+
+            this.$emit('clicked', 'login')
         }
     }
 }
@@ -78,6 +82,12 @@ export default {
             <div class="col-2 align-self-center offset-5">
                 <label for="meldung">Meldung</label>
                 <input v-model="this.meldung" type="text" name="meldung" readonly>
+            </div>
+        </div>
+
+        <div class="row col-12 align-self-center">
+            <div class="col-2 align-self-center offset-5">
+                <button @click="changeToLoginPage()" class="btn btn-primary">Zurück zum Login</button>
             </div>
         </div>
     </form>

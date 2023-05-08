@@ -2,21 +2,45 @@
 
 import Login from './components/LoginPage.vue'
 import Register from './components/RegisterPage.vue'
+import BoardsUebersicht from "@/components/BoardsUebersicht.vue";
 
 export default {
 
     components: {
         "login": Login,
-        "register": Register
+        "register": Register,
+        "boards": BoardsUebersicht
     },
     data() {
         return {
-            activeComp: 'login'
+            activeComp: 'login',
+            benutzername: null
         }
     },
     created() {
     },
-    methods: {}
+    methods: {
+        onClickChild(value) {
+            this.activeComp = value;
+        },
+        setBenutzername(benutzername) {
+            this.benutzername = benutzername;
+            console.log(this.benutzername);
+        },
+        showAbmelden() {
+            if (this.activeComp === "login" || this.activeComp === "register") {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        abmelden() {
+            localStorage.removeItem("benutzerId");
+            this.onClickChild("login");
+            this.benutzername = null;
+
+        }
+    }
 }
 </script>
 <template>
@@ -25,15 +49,17 @@ export default {
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" @click="activeComp = 'login'">Login <span class="sr-only"></span></a>
+                <a class="nav-link" v-show="showAbmelden()" @click="abmelden()">Abmelden <span
+                        class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" @click="activeComp = 'register'">Register <span class="sr-only"></span></a>
+                <a class="nav-link" v-if="benutzername != null">{{ this.benutzername }} <span
+                        class="sr-only"></span></a>
             </li>
         </ul>
     </nav>
     <div>
-        <component :is="activeComp"></component>
+        <component @set-benutzername="setBenutzername" @clicked="onClickChild" :is="activeComp"></component>
     </div>
 </template>
 <style>

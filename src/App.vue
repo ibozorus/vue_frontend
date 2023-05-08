@@ -14,7 +14,8 @@ export default {
     data() {
         return {
             activeComp: 'login',
-            benutzername: null
+            benutzername: null,
+            newBoardName: ""
         }
     },
     created() {
@@ -41,9 +42,13 @@ export default {
             this.benutzername = null;
 
         },
+        openModal(modalId) {
+            $('#' + modalId).modal('toggle');
+        }
+        ,
         async createNewBoard() {
             let body = {
-                "text": "Board",
+                "text": this.newBoardName,
                 "benutzer": {
                     "id": sessionStorage.getItem("benutzerId")
                 }
@@ -59,6 +64,10 @@ export default {
             }).then((response) => {
                 response.json().then((data) => {
                     console.log(data);
+                }).then(() => {
+                    this.openModal("add-board-modal")
+                    this.$refs.childComp.getBoards();
+
                 })
             })
         }
@@ -79,7 +88,8 @@ export default {
                         class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" v-show="this.activeComp === 'boards'" @click="createNewBoard()">Create new
+                <a class="nav-link" v-show="this.activeComp === 'boards'" @click="openModal('add-board-modal')">Create
+                    new
                     board!!!!!<span
                             class="sr-only"></span></a>
             </li>
@@ -87,7 +97,32 @@ export default {
         </ul>
     </nav>
     <div>
-        <component @set-benutzername="setBenutzername" @clicked="onClickChild" :is="activeComp"></component>
+        <component ref="childComp" @set-benutzername="setBenutzername" @clicked="onClickChild"
+                   :is="activeComp"></component>
+    </div>
+
+  <!-- Modal -->
+    <div class="modal fade" id="add-board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="newboardname">Board Name</label>
+                    <input v-model="this.newBoardName" type="text" name="newboardname" required>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button @click="createNewBoard()" type="button" class="btn btn-primary">Save Board</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <style>

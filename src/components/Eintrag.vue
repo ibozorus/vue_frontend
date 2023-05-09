@@ -33,8 +33,15 @@ export default {
 </script>
 <template>
     <tr :id="'Eintrag-' + eintragId">
-        <td>{{ eintragText }}
-            <button @click="deleteEintrag(eintragId)" class="btn btn-primary">Delete</button>
+        <td>
+
+            <div class="container">
+                <div class="row">
+                    <input class="eintragInput col-10" type="text" :value="this.eintragText" readonly>
+                    <button @click="deleteEintrag(eintragId)" type="button" class="btn align-self-end col-2"><i
+                            class="fa-solid fa-minus"></i></button>
+                </div>
+            </div>
         </td>
     </tr>
 </template>

@@ -84,14 +84,14 @@ export default {
                         class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" v-show="showAbmelden()" @click="abmelden()">Abmelden <span
+                <a class="nav-link" v-show="showAbmelden()" @click="abmelden()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span
                         class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" v-show="this.activeComp === 'boards'" @click="openModal('add-board-modal')">Create
-                    new
-                    board!!!!!<span
-                            class="sr-only"></span></a>
+                <a class="nav-link" v-show="this.activeComp === 'boards'" @click="openModal('add-board-modal')"><i
+                        class="fa-solid fa-plus"></i><span
+                        class="sr-only"></span></a>
             </li>
 
         </ul>

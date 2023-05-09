@@ -80,11 +80,18 @@ export default {
 
             </Eintrag>
             <tr>
+
                 <td>
-                    <input class="addNewEintrag" v-model="this.newEintragtext" type="text" placeholder="Add new Eintrag"
-                           required>
-                    <button @click="addEintrag(this.boardId)" type="button" class="btn btn-primary">Save Eintrag
-                    </button>
+                    <div class="container">
+                        <div class="row">
+                            <input class="eintragInput col-10" v-model="this.newEintragtext" type="text"
+                                   placeholder="Add new Eintrag"
+                                   required>
+                            <button @click="addEintrag(this.boardId)" type="button" class="btn col-2 align-self-end"><i
+                                    class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -95,12 +102,12 @@ export default {
     </div>
 </template>
 <style>
-.addNewEintrag {
+.eintragInput {
     border: 0px;
     background: transparent;
 }
 
-.addNewEintrag:focus {
+.eintragInput:focus {
     border: 0px;
     background: transparent;
     outline: none;

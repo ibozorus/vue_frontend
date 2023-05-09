@@ -59,6 +59,7 @@ export default {
                 }
             }).then(() => {
                 this.getEintraege();
+                this.newEintragtext = "";
             });
         }
     }

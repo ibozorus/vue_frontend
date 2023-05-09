@@ -46,11 +46,11 @@ export default {
         <table  class="table table-bordered  table-hover table-striped table-sm" :id="'board-'+this.boardId">
             <thead>
             <tr>
-                <th>{{ boardText }} <button class="btn btn-primary">Edit</button></th>
+                <th>{{ boardText }}</th>
             </tr>
             </thead>
             <tbody>
-            <Eintrag v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
+            <Eintrag @reload-eintraege="getEintraege" v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
                      :eintrag-text="eintrag.text">
 
             </Eintrag>

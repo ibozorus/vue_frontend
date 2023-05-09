@@ -70,9 +70,6 @@ export default {
             <thead>
             <tr>
                 <th>{{ boardText }}
-                    <input v-model="this.newEintragtext" type="text" placeholder="Eintrag Text" required>
-                    <button @click="addEintrag(this.boardId)" type="button" class="btn btn-primary">Save Eintrag
-                    </button>
                 </th>
             </tr>
             </thead>
@@ -82,6 +79,14 @@ export default {
                      :eintrag-text="eintrag.text">
 
             </Eintrag>
+            <tr>
+                <td>
+                    <input class="addNewEintrag" v-model="this.newEintragtext" type="text" placeholder="Add new Eintrag"
+                           required>
+                    <button @click="addEintrag(this.boardId)" type="button" class="btn btn-primary">Save Eintrag
+                    </button>
+                </td>
+            </tr>
             </tbody>
 
         </table>
@@ -90,4 +95,13 @@ export default {
     </div>
 </template>
 <style>
+.addNewEintrag {
+    border: 0px;
+    background: transparent;
+}
+.addNewEintrag:focus {
+    border: 0px;
+    background: transparent;
+    outline: none;
+}
 </style>

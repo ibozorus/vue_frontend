@@ -10,7 +10,9 @@ export default {
     data() {
         return {
             "eintraege": [],
-            "anzahlEintraege": 0
+            "anzahlEintraege": 0,
+            "newEintragtext": null,
+            "selectedBoard": 0
 
         }
     },
@@ -38,16 +40,19 @@ export default {
                 })
             })
         },
-        async addEintrag(boardId) {
+        async addEintrag() {
             let body = {
-                "text": "Eintrag 5",
+                "text": this.newEintragtext,
                 "board": {
-                    "id": boardId,
+                    "id": this.selectedBoard,
                     "benutzer": {
                         "id": sessionStorage.getItem("benutzerId")
                     }
                 }
             }
+            console.log("body:" + JSON.stringify(body))
+            console.log(this.newEintragtext)
+            console.log(this.selectedBoard)
 
             await fetch("http://localhost:8081/api/v1/eintrag", {
                 method: "POST",
@@ -59,6 +64,12 @@ export default {
             }).then(() => {
                 this.getEintraege();
             });
+        },
+        openModal(modalId, boardId) {
+            this.selectedBoard = boardId;
+            console.log(this.selectedBoard)
+            console.log(boardId)
+            $('#' + modalId).modal('toggle');
         }
     }
 }
@@ -69,7 +80,7 @@ export default {
             <thead>
             <tr>
                 <th>{{ boardText }}
-                    <button @click="addEintrag(this.boardId)" class="btn btn-primary">Add</button>
+                    <button @click="openModal('add-eintrag-modal', this.boardId)" class="btn btn-primary">Add</button>
                 </th>
             </tr>
             </thead>
@@ -82,6 +93,30 @@ export default {
             </tbody>
 
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="add-eintrag-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="neweintragtext">Eintrag Text</label>
+                        <input v-model="this.newEintragtext" type="text" name="neweintragtext" required>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button @click="addEintrag()" type="button" class="btn btn-primary">Save Eintrag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>

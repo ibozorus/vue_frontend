@@ -37,20 +37,45 @@ export default {
 
                 })
             })
+        },
+        async addEintrag(boardId) {
+            let body = {
+                "text": "Eintrag 5",
+                "board": {
+                    "id": boardId,
+                    "benutzer": {
+                        "id": sessionStorage.getItem("benutzerId")
+                    }
+                }
+            }
+
+            await fetch("http://localhost:8081/api/v1/eintrag", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => {
+                this.getEintraege();
+            });
         }
     }
 }
 </script>
 <template>
     <div class="col-3">
-        <table  class="table table-bordered  table-hover table-striped table-sm" :id="'board-'+this.boardId">
+        <table class="table table-bordered  table-hover table-striped table-sm" :id="'board-'+this.boardId">
             <thead>
             <tr>
-                <th>{{ boardText }}</th>
+                <th>{{ boardText }}
+                    <button @click="addEintrag(this.boardId)" class="btn btn-primary">Add</button>
+                </th>
             </tr>
             </thead>
             <tbody>
-            <Eintrag @reload-eintraege="getEintraege" v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
+            <Eintrag @reload-eintraege="getEintraege" v-if="anzahlEintraege > 0" v-for="eintrag in eintraege"
+                     :eintrag-id="eintrag.id"
                      :eintrag-text="eintrag.text">
 
             </Eintrag>

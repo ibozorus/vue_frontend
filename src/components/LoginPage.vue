@@ -85,7 +85,7 @@ export default {
         </div>
         <div class="row col-12 align-self-center">
             <div class="col-2 align-self-center offset-5">
-                <button @click="changeToRegisterPage()" class="btn btn-primary">Noch kein Konto?</button>
+                <button @click="changeToRegisterPage()" class="btn btn-secondary">Noch kein Konto?</button>
             </div>
         </div>
         <!--        <div class="row col-12 align-self-center">-->

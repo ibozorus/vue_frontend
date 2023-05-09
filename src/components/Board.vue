@@ -40,20 +40,16 @@ export default {
                 })
             })
         },
-        async addEintrag() {
+        async addEintrag(boardId) {
             let body = {
                 "text": this.newEintragtext,
                 "board": {
-                    "id": this.selectedBoard,
+                    "id": boardId,
                     "benutzer": {
                         "id": sessionStorage.getItem("benutzerId")
                     }
                 }
             }
-            console.log("body:" + JSON.stringify(body))
-            console.log(this.newEintragtext)
-            console.log(this.selectedBoard)
-
             await fetch("http://localhost:8081/api/v1/eintrag", {
                 method: "POST",
                 body: JSON.stringify(body),
@@ -64,23 +60,19 @@ export default {
             }).then(() => {
                 this.getEintraege();
             });
-        },
-        openModal(modalId, boardId) {
-            this.selectedBoard = boardId;
-            console.log(this.selectedBoard)
-            console.log(boardId)
-            $('#' + modalId).modal('toggle');
         }
     }
 }
 </script>
 <template>
-    <div class="col-3">
+    <div class="col-4">
         <table class="table table-bordered  table-hover table-striped table-sm" :id="'board-'+this.boardId">
             <thead>
             <tr>
                 <th>{{ boardText }}
-                    <button @click="openModal('add-eintrag-modal', this.boardId)" class="btn btn-primary">Add</button>
+                    <input v-model="this.newEintragtext" type="text" placeholder="Eintrag Text" required>
+                    <button @click="addEintrag(this.boardId)" type="button" class="btn btn-primary">Save Eintrag
+                    </button>
                 </th>
             </tr>
             </thead>
@@ -94,29 +86,6 @@ export default {
 
         </table>
 
-        <!-- Modal -->
-        <div class="modal fade" id="add-eintrag-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="neweintragtext">Eintrag Text</label>
-                        <input v-model="this.newEintragtext" type="text" name="neweintragtext" required>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button @click="addEintrag()" type="button" class="btn btn-primary">Save Eintrag</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </template>

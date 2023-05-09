@@ -11,8 +11,7 @@ export default {
         return {
             "eintraege": [],
             "anzahlEintraege": 0,
-            "newEintragtext": null,
-            "selectedBoard": 0
+            "newEintragtext": null
 
         }
     },
@@ -100,6 +99,7 @@ export default {
     border: 0px;
     background: transparent;
 }
+
 .addNewEintrag:focus {
     border: 0px;
     background: transparent;

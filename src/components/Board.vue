@@ -42,17 +42,23 @@ export default {
 }
 </script>
 <template>
-    <table :id="'board-'+this.boardId">
-        <tr>
-            <th>{{ boardText }}</th>
-        </tr>
+    <div class="col-3">
+        <table  class="table table-bordered  table-hover table-striped table-sm" :id="'board-'+this.boardId">
+            <thead>
+            <tr>
+                <th>{{ boardText }} <button class="btn btn-primary">Edit</button></th>
+            </tr>
+            </thead>
+            <tbody>
+            <Eintrag v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
+                     :eintrag-text="eintrag.text">
 
-        <Eintrag v-if="anzahlEintraege > 0" v-for="eintrag in eintraege" :eintrag-id="eintrag.id"
-                 :eintrag-text="eintrag.text">
+            </Eintrag>
+            </tbody>
 
-        </Eintrag>
+        </table>
 
-    </table>
+    </div>
 </template>
 <style>
 </style>

@@ -5,25 +5,21 @@ export default {
         "eintragId": Number,
         "eintragText": String
     },
-    components:{} ,
+    components: {},
     data() {
-        return {
-
-        }
+        return {}
     },
     created() {
     },
     mounted() {
     },
-    methods: {
-
-    }
+    methods: {}
 }
 </script>
 <template>
-        <tr :id="'Eintrag-' + eintragId">
-            <td>{{ eintragText }}</td>
-        </tr>
+    <tr :id="'Eintrag-' + eintragId">
+        <td>{{ eintragText }}</td>
+    </tr>
 </template>
 <style>
 </style>

@@ -37,7 +37,7 @@ export default {
 }
 </script>
 <template>
-    <div>
+    <div class="row">
         <Board v-if="anzahlBoards > 0" v-for="board in boards" :board-id="board.id" :board-text="board.text">
 
         </Board>

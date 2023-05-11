@@ -1,6 +1,10 @@
 {
+  "localhost": {
+    "host": "http://localhost",
+    "port": ":8081/"
+  },
   "server": {
-    "host": "https://note-backend-4rx7.onrender.com/",
+    "host": "http://note-backend-4rx7.onrender.com/",
     "port": ""
   }
 }

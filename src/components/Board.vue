@@ -4,7 +4,8 @@ import Eintrag from "@/components/Eintrag.vue";
 export default {
     props: {
         "boardId": Number,
-        "boardText": String
+        "boardText": String,
+        "apiUrl": String
     },
     components: {Eintrag},
     data() {
@@ -22,7 +23,7 @@ export default {
     },
     methods: {
         async getEintraege() {
-            return await fetch("http://localhost:8081/api/v1/eintrag/" + this.boardId, {
+            return await fetch(this.apiUrl + "api/v1/eintrag/" + this.boardId, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -49,7 +50,7 @@ export default {
                     }
                 }
             }
-            await fetch("http://localhost:8081/api/v1/eintrag", {
+            await fetch(this.apiUrl + "api/v1/eintrag", {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
@@ -76,7 +77,8 @@ export default {
             <tbody>
             <Eintrag @reload-eintraege="getEintraege" v-if="anzahlEintraege > 0" v-for="eintrag in eintraege"
                      :eintrag-id="eintrag.id"
-                     :eintrag-text="eintrag.text">
+                     :eintrag-text="eintrag.text"
+                     :api-url="apiUrl">
 
             </Eintrag>
             <tr>

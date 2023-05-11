@@ -1,5 +1,8 @@
 <script>
 export default {
+    props: {
+        "apiUrl": String
+    },
     data() {
         return {
             benutzername: "",
@@ -20,7 +23,7 @@ export default {
                 "email": this.email,
                 "password": this.kennwort
             }
-            await fetch("http://localhost:8081/api/v1/benutzer", {
+            await fetch(this.apiUrl + "api/v1/benutzer", {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
@@ -46,7 +49,7 @@ export default {
                 this.meldung = "Fehlgeschlagen!"
             }
         },
-        changeToLoginPage(){
+        changeToLoginPage() {
 
             this.$emit('clicked', 'login')
         }

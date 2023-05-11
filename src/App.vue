@@ -3,6 +3,7 @@
 import Login from './components/LoginPage.vue'
 import Register from './components/RegisterPage.vue'
 import BoardsUebersicht from "@/components/BoardsUebersicht.vue";
+import config from './config/config.json'
 
 export default {
 
@@ -15,13 +16,19 @@ export default {
         return {
             activeComp: 'login',
             benutzername: null,
-            newBoardName: ""
+            newBoardName: "",
+            config: config
         }
     },
     created() {
         sessionStorage.clear();
     },
     methods: {
+        getApiUrl() {
+            let url = this.config.server.host + this.config.server.port
+            return url;
+        }
+        ,
         onClickChild(value) {
             this.activeComp = value;
         },
@@ -53,7 +60,7 @@ export default {
                     "id": sessionStorage.getItem("benutzerId")
                 }
             }
-            await fetch("http://localhost:8081/api/v1/board", {
+            await fetch(this.getApiUrl() + "api/v1/board", {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
@@ -97,7 +104,7 @@ export default {
         </ul>
     </nav>
     <div>
-        <component ref="childComp" @set-benutzername="setBenutzername" @clicked="onClickChild"
+        <component ref="childComp" :api-url="getApiUrl()" @set-benutzername="setBenutzername" @clicked="onClickChild"
                    :is="activeComp"></component>
     </div>
 

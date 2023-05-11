@@ -2,7 +2,9 @@
 import Board from "@/components/Board.vue";
 
 export default {
-
+    props: {
+        "apiUrl": String
+    },
     components: {
         "Board": Board
     },
@@ -18,7 +20,7 @@ export default {
     methods: {
         async getBoards() {
             let benutzerId = sessionStorage.getItem("benutzerId");
-            return await fetch("http://localhost:8081/api/v1/board/" + benutzerId, {
+            return await fetch(this.apiUrl + "api/v1/board/" + benutzerId, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -39,7 +41,7 @@ export default {
 <template>
     <div class="row">
 
-        <Board v-if="anzahlBoards > 0" v-for="board in boards" :board-id="board.id" :board-text="board.text">
+        <Board :api-url="apiUrl" v-if="anzahlBoards > 0" v-for="board in boards" :board-id="board.id" :board-text="board.text">
 
         </Board>
     </div>

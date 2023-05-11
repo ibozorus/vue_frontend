@@ -3,7 +3,8 @@
 export default {
     props: {
         "eintragId": Number,
-        "eintragText": String
+        "eintragText": String,
+        "apiUrl": String
     },
     components: {},
     data() {
@@ -15,7 +16,7 @@ export default {
     },
     methods: {
         async deleteEintrag(eintragId) {
-            await fetch("http://localhost:8081/api/v1/eintrag/" + eintragId, {
+            await fetch(this.apiUrl + "api/v1/eintrag/" + eintragId, {
                 method: "DELETE",
                 headers: {
                     'Accept': 'application/json',

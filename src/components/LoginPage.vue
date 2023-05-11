@@ -1,5 +1,8 @@
 <script>
 export default {
+    props: {
+        "apiUrl": String
+    },
     data() {
         return {
             email: "",
@@ -26,7 +29,7 @@ export default {
                 "email": this.email,
                 "password": this.kennwort
             }
-            await fetch("http://localhost:8081/api/v1/benutzer/check-login", {
+            await fetch(this.apiUrl + "api/v1/benutzer/check-login", {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {

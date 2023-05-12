@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         getApiUrl() {
-            let url = this.config.localhost.host + this.config.localhost.port
+            let url = this.config.server.host + this.config.server.port
             return url;
         }
         ,

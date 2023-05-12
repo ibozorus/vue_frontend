@@ -4,7 +4,7 @@
     "port": ":8081/"
   },
   "server": {
-    "host": "http://note-backend-4rx7.onrender.com/",
+    "host": "https://note-backend-4rx7.onrender.com/",
     "port": ""
   }
 }
